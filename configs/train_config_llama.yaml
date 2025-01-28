@@ -1,0 +1,99 @@
+dataset_config:
+  desc: Multilinuagal sentiment classification dataset
+  train:
+    dataset_path: tyqiangz/multilingual-sentiments
+    dataset_language: 'english' # all languages
+    return_dict: true
+    padding: longest
+    max_length: 512
+    sub_split_size: null
+
+  val:
+    dataset_path: tyqiangz/multilingual-sentiments
+    dataset_language: 'english' # all languages
+    return_dict: true
+    padding: longest
+    max_length: 512
+    sub_split_size: null
+
+tokenizer_config:
+  tokenizer_name: llama2
+  tokenizer_path: 'meta-llama/Llama-2-7b-hf'
+
+model_config:
+  model_name: llama2-base
+  base_model_path: meta-llama/Llama-2-7b-hf
+  num_labels: 3
+  force_download: false
+  device_map: cuda:0
+  bnb_config:
+    load_in_4bit: true
+    bnb_4bit_quant_type: nf4
+    bnb_4bit_compute_dtype: 'float16'
+    bnb_4bit_use_double_quant: false
+
+# model_config:
+#   model_name: llama2-finetuned
+#   model_path: /home/harsh/Desktop/Projects/LLMs/SentimentClassification/TrainingLogs/runs/llama_test/model
+#   base_model_path: meta-llama/Llama-2-7b-hf
+#   num_labels: 3
+#   force_download: false
+#   device_map: cuda:0
+#   bnb_config:
+#     load_in_4bit: true
+#     bnb_4bit_quant_type: nf4
+#     bnb_4bit_compute_dtype: 'float16'
+#     bnb_4bit_use_double_quant: false
+
+# lora goes here
+lora_config:
+  r: 16
+  lora_alpha: 64
+  lora_dropout: 0.1
+  bias: 'none'
+  task_type: SEQ_CLS
+  target_modules: 
+    - q_proj
+    - up_proj
+    - o_proj
+    - k_proj
+    - down_proj
+    - gate_proj
+    - v_proj
+
+trainer_config:
+  # save related
+  save_trained_model: true
+  save_strategy: 'no'
+  save_total_limit: 2
+  # log outputs
+  run_name: llama2_english
+  report_to: tensorboard
+  output_dir: "./TrainingLogs/"
+  overwrite_output_dir: true
+  # train args
+  fp16: true
+  do_train: true
+  do_eval: true
+  eval_strategy: epoch
+  num_train_epochs: 5
+  per_device_train_batch_size: 5
+  prediction_loss_only: false
+  # log configs
+  logging_strategy: steps
+  logging_steps: 2
+  save_steps: 25
+  # train configs
+  max_grad_norm: 0.3
+  seed: random
+  warmup_ratio: 0.05
+  learning_rate: 1.0E-4
+  lr_scheduler_type: cosine
+  optim: paged_adamw_32bit
+
+
+prediction_config:
+  samples: 
+    - this is a good product
+    - this is a bad product
+    - this is a very stupid product

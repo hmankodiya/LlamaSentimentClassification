@@ -1,0 +1,19 @@
+
+tokenizer_config:
+  tokenizer_name: gpt2
+  tokenizer_path: 'openai-community/gpt2'
+
+model_config:
+  model_name: gpt2
+  model_path: '/home/harsh/Desktop/Projects/LLMs/SentimentClassification/TrainingLogs/runs/run_2_better/model'
+  num_labels: 3
+  # force_download: true
+  # config goes here
+
+prediction_config:
+  samples: 
+    - what was the irony?
+    - Gisburn was very curious
+    # - Gisburn was very curious
+    # - Mrs. Gisburn was wealthy
+    # - I made a deprecating

@@ -1,3 +1,8 @@
+# custom
+TrainingLogs/
+rough.ipynb_checkpoints
+/Fine_tune_Llama_2_in_Google_Colab.ipynb
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

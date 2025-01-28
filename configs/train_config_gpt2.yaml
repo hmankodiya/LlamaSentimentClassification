@@ -1,0 +1,64 @@
+dataset_config:
+  desc: Multilinuagal sentiment classification dataset
+  train:
+    dataset_path: tyqiangz/multilingual-sentiments
+    dataset_language: 'all' # all languages
+    return_dict: true
+    padding: longest
+    max_length: 512
+    sub_split_size: 0.02
+
+  val:
+    dataset_path: tyqiangz/multilingual-sentiments
+    dataset_language: 'all' # all languages
+    return_dict: true
+    padding: longest
+    max_length: 512
+    sub_split_size: 0.1
+
+tokenizer_config:
+  tokenizer_name: gpt2
+  tokenizer_path: 'openai-community/gpt2'
+
+model_config:
+  model_name: gpt2
+  model_path: 'openai-community/gpt2'
+  num_labels: 3
+  # force_download: true
+  # config goes here
+
+trainer_config:
+  # save related
+  save_trained_model: true
+  save_strategy: epoch
+  save_total_limit: 2
+  # log outputs
+  run_name: gpt2_run_1_t0.02
+  report_to: tensorboard
+  output_dir: "./TrainingLogs/"
+  overwrite_output_dir: true
+  # train args
+  do_train: true
+  do_eval: true
+  eval_strategy: epoch
+  num_train_epochs: 2
+  per_device_train_batch_size: 10
+  prediction_loss_only: false
+  # log configs
+  logging_strategy: steps
+  logging_steps: 2
+  save_steps: 25
+  # train configs
+  max_grad_norm: 0.3
+  seed: random
+  warmup_ratio: 0.05
+  learning_rate: 1.0E-4
+  lr_scheduler_type: cosine
+  optim: 'adamw_torch'
+
+
+prediction_config:
+  samples: 
+    - this is a good product
+    - this is a bad product
+    - this is a very stupid product

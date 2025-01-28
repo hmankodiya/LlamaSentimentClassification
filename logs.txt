@@ -1,0 +1,33 @@
+2025-01-10 21:09:05,603 - DEBUG - utils.py - Attempting to read YAML file from './configs/train_config_llama.yaml'
+2025-01-10 21:09:05,606 - INFO - utils.py - YAML file './configs/train_config_llama.yaml' loaded successfully.
+2025-01-10 21:09:05,607 - DEBUG - utils.py - Configuration loaded: {'dataset_config': {'desc': 'Multilinuagal sentiment classification dataset', 'train': {'dataset_path': 'tyqiangz/multilingual-sentiments', 'dataset_language': 'english', 'return_dict': True, 'padding': 'longest', 'max_length': 512, 'sub_split_size': None}, 'val': {'dataset_path': 'tyqiangz/multilingual-sentiments', 'dataset_language': 'english', 'return_dict': True, 'padding': 'longest', 'max_length': 512, 'sub_split_size': None}}, 'tokenizer_config': {'tokenizer_name': 'llama2', 'tokenizer_path': 'meta-llama/Llama-2-7b-hf'}, 'model_config': {'model_name': 'llama2-base', 'base_model_path': 'meta-llama/Llama-2-7b-hf', 'num_labels': 3, 'force_download': False, 'device_map': 'cuda:0', 'bnb_config': {'load_in_4bit': True, 'bnb_4bit_quant_type': 'nf4', 'bnb_4bit_compute_dtype': 'float16', 'bnb_4bit_use_double_quant': False}}, 'lora_config': {'r': 16, 'lora_alpha': 64, 'lora_dropout': 0.1, 'bias': 'none', 'task_type': 'SEQ_CLS', 'target_modules': ['q_proj', 'up_proj', 'o_proj', 'k_proj', 'down_proj', 'gate_proj', 'v_proj']}, 'trainer_config': {'save_trained_model': True, 'save_strategy': 'no', 'save_total_limit': 2, 'run_name': 'llama2_english', 'report_to': 'tensorboard', 'output_dir': './TrainingLogs/', 'overwrite_output_dir': True, 'fp16': True, 'do_train': True, 'do_eval': True, 'eval_strategy': 'epoch', 'num_train_epochs': 5, 'per_device_train_batch_size': 5, 'prediction_loss_only': False, 'logging_strategy': 'steps', 'logging_steps': 2, 'save_steps': 25, 'max_grad_norm': 0.3, 'seed': 'random', 'warmup_ratio': 0.05, 'learning_rate': 0.0001, 'lr_scheduler_type': 'cosine', 'optim': 'paged_adamw_32bit'}, 'prediction_config': {'samples': ['this is a good product', 'this is a bad product', 'this is a very stupid product']}}
+2025-01-10 21:09:05,607 - INFO - utils.py - Loaded tokenizer configuration: {'tokenizer_name': 'llama2', 'tokenizer_path': 'meta-llama/Llama-2-7b-hf'}
+2025-01-10 21:09:05,607 - INFO - model.py - Initializing tokenizer 'llama2' with arguments: {'tokenizer_path': 'meta-llama/Llama-2-7b-hf', 'config': {}}
+2025-01-10 21:09:05,878 - DEBUG - model.py - Special tokens added to the tokenizer.
+2025-01-10 21:09:05,878 - INFO - utils.py - Loaded dataset configuration: {'return_dict': True, 'padding': 'longest', 'max_length': 512, 'sub_split_size': None}
+2025-01-10 21:09:07,950 - INFO - train.py - Loaded Train Dataset: Multilinuagal sentiment classification dataset, Dataset Length: 1839 with sub_split_size None.
+2025-01-10 21:09:07,950 - INFO - utils.py - Loaded dataset configuration: {'return_dict': True, 'padding': 'longest', 'max_length': 512, 'sub_split_size': None}
+2025-01-10 21:09:08,564 - INFO - train.py - Loaded Val Dataset: Multilinuagal sentiment classification dataset, Dataset Length: 324.
+2025-01-10 21:09:08,564 - INFO - utils.py - Loaded model configuration: {'model_name': 'llama2-base', 'base_model_path': 'meta-llama/Llama-2-7b-hf', 'num_labels': 3, 'force_download': False, 'device_map': 'cuda:0', 'bnb_config': {'load_in_4bit': True, 'bnb_4bit_quant_type': 'nf4', 'bnb_4bit_compute_dtype': 'float16', 'bnb_4bit_use_double_quant': False}}
+2025-01-10 21:09:08,564 - INFO - model.py - Initializing model 'llama2-base' with arguments: {'base_model_path': 'meta-llama/Llama-2-7b-hf', 'config': {'num_labels': 3, 'force_download': False, 'device_map': 'cuda:0', 'bnb_config': {'load_in_4bit': True, 'bnb_4bit_quant_type': 'nf4', 'bnb_4bit_compute_dtype': 'float16', 'bnb_4bit_use_double_quant': False}, 'pad_token_id': 2}}
+2025-01-10 21:09:15,136 - DEBUG - model.py - Base model loaded successfully.
+2025-01-10 21:09:15,143 - INFO - utils.py - Loaded trainer configuration: {'r': 16, 'lora_alpha': 64, 'lora_dropout': 0.1, 'bias': 'none', 'task_type': 'SEQ_CLS', 'target_modules': ['q_proj', 'up_proj', 'o_proj', 'k_proj', 'down_proj', 'gate_proj', 'v_proj']}
+2025-01-10 21:09:15,639 - INFO - utils.py - Loaded trainer configuration: {'save_trained_model': True, 'save_strategy': 'no', 'save_total_limit': 2, 'run_name': 'llama2_english', 'report_to': 'tensorboard', 'output_dir': './TrainingLogs/', 'overwrite_output_dir': True, 'fp16': True, 'do_train': True, 'do_eval': True, 'eval_strategy': 'epoch', 'num_train_epochs': 5, 'per_device_train_batch_size': 5, 'prediction_loss_only': False, 'logging_strategy': 'steps', 'logging_steps': 2, 'save_steps': 25, 'max_grad_norm': 0.3, 'seed': 857998854, 'warmup_ratio': 0.05, 'learning_rate': 0.0001, 'lr_scheduler_type': 'cosine', 'optim': 'paged_adamw_32bit'}
+2025-01-10 21:09:15,694 - INFO - train.py - Training started.
+2025-01-10 22:01:28,961 - INFO - train.py - Training finished.
+2025-01-10 22:01:28,961 - INFO - train.py - Saving model at ./TrainingLogs/runs/llama2_english
+2025-01-10 22:01:29,657 - INFO - utils.py - Loaded prediction configuration: {'samples': ['this is a good product', 'this is a bad product', 'this is a very stupid product']}
+2025-01-10 22:01:29,657 - INFO - model.py - Generating text for prompt: ['this is a good product', 'this is a bad product', 'this is a very stupid product']
+2025-01-10 22:01:29,657 - DEBUG - model.py - Tokenizing the input prompt.
+2025-01-10 22:01:29,658 - DEBUG - model.py - Starting sentiment inference.
+2025-01-10 22:01:30,144 - INFO - model.py - Sentiment classification completed successfully.
+2025-01-10 22:01:30,144 - INFO - train.py - Logging predicted outputs for sample prompts:
+2025-01-10 22:01:30,144 - INFO - train.py - Sample 1:
+2025-01-10 22:01:30,144 - INFO - train.py -   Prompt: "this is a good product"
+2025-01-10 22:01:30,144 - INFO - train.py -   Predicted Output: "positive"
+2025-01-10 22:01:30,144 - INFO - train.py - Sample 2:
+2025-01-10 22:01:30,144 - INFO - train.py -   Prompt: "this is a bad product"
+2025-01-10 22:01:30,144 - INFO - train.py -   Predicted Output: "negative"
+2025-01-10 22:01:30,144 - INFO - train.py - Sample 3:
+2025-01-10 22:01:30,144 - INFO - train.py -   Prompt: "this is a very stupid product"
+2025-01-10 22:01:30,144 - INFO - train.py -   Predicted Output: "negative"

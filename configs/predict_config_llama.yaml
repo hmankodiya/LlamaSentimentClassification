@@ -1,0 +1,34 @@
+dataset_config:
+  desc: Multilinuagal sentiment classification dataset
+  test:
+    dataset_path: tyqiangz/multilingual-sentiments
+    dataset_language: 'english' # all languages
+    return_dict: true
+    padding: longest
+    max_length: 512
+    sub_split_size: null
+
+tokenizer_config:
+  tokenizer_name: llama2
+  tokenizer_path: 'meta-llama/Llama-2-7b-hf'
+
+model_config:
+  model_name: llama2-finetuned
+  model_path: /home/harsh/Desktop/Projects/LLMs/SentimentClassification/TrainingLogs/runs/llama2_english/model
+  base_model_path: meta-llama/Llama-2-7b-hf
+  num_labels: 3
+  force_download: false
+  device_map: cuda:0
+  bnb_config:
+    load_in_4bit: true
+    bnb_4bit_quant_type: nf4
+    bnb_4bit_compute_dtype: 'float16'
+    bnb_4bit_use_double_quant: false
+
+prediction_config:
+  samples: 
+    - what was the irony?
+    - Gisburn was very curious
+    # - Gisburn was very curious
+    # - Mrs. Gisburn was wealthy
+    # - I made a deprecating
