@@ -376,6 +376,6 @@ def compute_metrics(data, metrics):
         auc_metric = metrics["auc"].compute(
             prediction_scores=predict_scores, references=labels, multi_class="ovr"
         )
-        results["auc"] = round(acc_metric["roc_acu"], 5)
+        results["auc"] = round(auc_metric["roc_auc"], 5)
 
     return results

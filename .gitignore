@@ -2,6 +2,7 @@
 TrainingLogs/
 rough.ipynb_checkpoints
 /Fine_tune_Llama_2_in_Google_Colab.ipynb
+/logs.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
