@@ -77,7 +77,6 @@ if __name__ == "__main__":
         required=False,
         default=True,
         help="Validate on val split.",
-
     )
     arg_parser.add_argument(
         "--predict",
@@ -94,7 +93,6 @@ if __name__ == "__main__":
         help="Lora for model.",
     )
 
-    
     args = arg_parser.parse_args()
     config = read_yaml(args.config)
 
@@ -169,6 +167,7 @@ if __name__ == "__main__":
         trainer_config["output_dir"], "runs", trainer_config["run_name"]
     )
     save_trained_model = trainer_config.pop("save_trained_model", True)
+    resume_from_checkpoint = trainer_config.pop("resume_from_checkpoint", None)
     trainer_args = TrainingArguments(**trainer_config)
     trainer = Trainer(
         model,
@@ -179,7 +178,7 @@ if __name__ == "__main__":
         compute_metrics=lambda x: (compute_metrics(x, METRICS_DICT)),
     )
     logger.info("Training started.")
-    training_outs = trainer.train()
+    training_outs = trainer.train(resume_from_checkpoint=resume_from_checkpoint)
     logger.info("Training finished.")
 
     if save_trained_model:

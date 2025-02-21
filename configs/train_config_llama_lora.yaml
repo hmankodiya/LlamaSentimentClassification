@@ -1,0 +1,82 @@
+dataset_config:
+  desc: Multilinuagal sentiment classification dataset
+  train:
+    dataset_path: tyqiangz/multilingual-sentiments
+    dataset_language: "all" # all languages
+    return_dict: true
+    padding: longest
+    max_length: 512
+    sub_split_size: 0.05
+
+  val:
+    dataset_path: tyqiangz/multilingual-sentiments
+    dataset_language: "all" # all languages
+    return_dict: true
+    padding: longest
+    max_length: 512
+    sub_split_size: null
+
+tokenizer_config:
+  tokenizer_name: llama2
+  tokenizer_path: "meta-llama/Llama-2-7b-hf"
+
+model_config:
+  model_name: llama2-base
+  base_model_path: meta-llama/Llama-2-7b-hf
+  num_labels: 3
+  force_download: false
+  device_map: cuda:0
+  use_cache: false
+
+# lora goes here
+lora_config:
+  r: 16
+  lora_alpha: 64
+  lora_dropout: 0.1
+  bias: "none"
+  task_type: SEQ_CLS
+  target_modules:
+    - q_proj
+    - up_proj
+    - o_proj
+    - k_proj
+    - down_proj
+    - gate_proj
+    - v_proj
+
+trainer_config:
+  # resume from checkpoint
+  resume_from_checkpoint: /home/hmankodi/Projects/LlamaSentimentClassification/TrainingLogs/checkpoint-542
+  # save related
+  save_trained_model: true
+  save_strategy: epoch
+  save_total_limit: 2
+  # log outputs
+  run_name: llama2_lora_all
+  report_to: tensorboard
+  output_dir: "./TrainingLogs/"
+  overwrite_output_dir: true
+  # train args
+  fp16: true
+  do_train: true
+  do_eval: true
+  eval_strategy: epoch
+  num_train_epochs: 10
+  per_device_train_batch_size: 50
+  prediction_loss_only: false
+  # log configs
+  logging_strategy: steps
+  logging_steps: 1
+  # train configs
+  max_grad_norm: 0.3
+  seed: random
+  warmup_ratio: 0.05
+  learning_rate: 1.0E-4
+  lr_scheduler_type: cosine
+  optim: paged_adamw_32bit
+
+prediction_config:
+  samples:
+    - this is a good product
+    - this is a bad product
+    - this is a very stupid product
