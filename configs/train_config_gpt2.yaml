@@ -6,7 +6,7 @@ dataset_config:
     return_dict: true
     padding: longest
     max_length: 512
-    sub_split_size: 0.02
+    sub_split_size: 0.05
 
   val:
     dataset_path: tyqiangz/multilingual-sentiments
@@ -14,7 +14,7 @@ dataset_config:
     return_dict: true
     padding: longest
     max_length: 512
-    sub_split_size: 0.1
+    sub_split_size: null
 
 tokenizer_config:
   tokenizer_name: gpt2
@@ -33,7 +33,7 @@ trainer_config:
   save_strategy: epoch
   save_total_limit: 2
   # log outputs
-  run_name: gpt2_run_1_t0.02
+  run_name: gpt2_all
   report_to: tensorboard
   output_dir: "./TrainingLogs/"
   overwrite_output_dir: true
@@ -41,13 +41,12 @@ trainer_config:
   do_train: true
   do_eval: true
   eval_strategy: epoch
-  num_train_epochs: 2
-  per_device_train_batch_size: 10
+  num_train_epochs: 20
+  per_device_train_batch_size: 100
   prediction_loss_only: false
   # log configs
   logging_strategy: steps
-  logging_steps: 2
-  save_steps: 25
+  logging_steps: 1
   # train configs
   max_grad_norm: 0.3
   seed: random

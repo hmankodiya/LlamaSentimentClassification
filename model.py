@@ -60,8 +60,10 @@ def load_pretrained_gpt2_model(model_path="openai-community/gpt2", **kwargs):
     """
     Loads a pre-trained GPT-2 model with an optional configuration.
     """
+    config = kwargs.pop("config", {})
+
     try:
-        model = GPT2ForSequenceClassification.from_pretrained(model_path, **kwargs)
+        model = GPT2ForSequenceClassification.from_pretrained(model_path, **config)
         logger.debug("Model loaded successfully.")
         return model
     except Exception as e:
@@ -364,7 +366,9 @@ def predict(
 def compute_metrics(data, metrics):
     predictions, labels = data
     predictions = predictions.astype(dtype=np.float32)
-    predict_scores = torch.nn.functional.softmax(torch.from_numpy(predictions), dim=-1).numpy()
+    predict_scores = torch.nn.functional.softmax(
+        torch.from_numpy(predictions), dim=-1
+    ).numpy()
     predict_labels = torch.from_numpy(predictions).argmax(dim=-1).numpy()
 
     results = {}
