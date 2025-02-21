@@ -4,6 +4,7 @@ import logging
 from typing import Union, List, Optional
 import html
 
+import numpy as np
 import torch
 import torch.nn as nn
 from transformers import (
@@ -362,8 +363,9 @@ def predict(
 
 def compute_metrics(data, metrics):
     predictions, labels = data
-    predict_scores = torch.softmax(torch.from_numpy(predictions), dim=-1).numpy()
-    predict_labels = torch.argmax(torch.from_numpy(predictions), dim=-1).numpy()
+    predictions = predictions.astype(dtype=np.float32)
+    predict_scores = torch.nn.functional.softmax(torch.from_numpy(predictions), dim=-1).numpy()
+    predict_labels = torch.from_numpy(predictions).argmax(dim=-1).numpy()
 
     results = {}
     if "accuracy" in metrics:

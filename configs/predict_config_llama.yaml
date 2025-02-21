@@ -2,11 +2,11 @@ dataset_config:
   desc: Multilinuagal sentiment classification dataset
   test:
     dataset_path: tyqiangz/multilingual-sentiments
-    dataset_language: 'english' # all languages
+    dataset_language: 'all' # all languages
     return_dict: true
     padding: longest
     max_length: 512
-    sub_split_size: null
+    sub_split_size: 0.01
 
 tokenizer_config:
   tokenizer_name: llama2
@@ -14,7 +14,7 @@ tokenizer_config:
 
 model_config:
   model_name: llama2-finetuned
-  model_path: /home/harsh/Desktop/Projects/LLMs/SentimentClassification/TrainingLogs/runs/llama2_english/model
+  model_path: /home/hmankodi/Projects/LlamaSentimentClassification/TrainingLogs/checkpoint-1088
   base_model_path: meta-llama/Llama-2-7b-hf
   num_labels: 3
   force_download: false

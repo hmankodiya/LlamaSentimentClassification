@@ -6,7 +6,7 @@ dataset_config:
     return_dict: true
     padding: longest
     max_length: 512
-    sub_split_size: null
+    sub_split_size: 0.05
 
   val:
     dataset_path: tyqiangz/multilingual-sentiments
@@ -31,6 +31,7 @@ model_config:
     bnb_4bit_quant_type: nf4
     bnb_4bit_compute_dtype: 'float16'
     bnb_4bit_use_double_quant: false
+  use_cache: false
 
 # model_config:
 #   model_name: llama2-finetuned
@@ -76,13 +77,12 @@ trainer_config:
   do_train: true
   do_eval: true
   eval_strategy: epoch
-  num_train_epochs: 30
-  per_device_train_batch_size: 30
+  num_train_epochs: 10
+  per_device_train_batch_size: 100
   prediction_loss_only: false
   # log configs
   logging_strategy: steps
-  logging_steps: 2
-  save_steps: 25
+  logging_steps: 1
   # train configs
   max_grad_norm: 0.3
   seed: random
