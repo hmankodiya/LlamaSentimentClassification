@@ -56,7 +56,7 @@
 | **Metric**             | **Value**  |
 |----------------------|------------|
 | **Trainable Parameters** | **12,288** |
-| **Total Parameters**     | **6,647,345,152** |
+| **Total Parameters**     | **6,647,345,152** **(7B)**|
 | **Trainable %**         | **0.0002%** |
 
 ### **Evaluation Metrics**
@@ -73,7 +73,7 @@
 | **Category**          | **Details** |
 |----------------------|------------|
 | **Base Model**       | GPT-2 |
-| **Total Parameters** | 124,442,112 |
+| **Total Parameters** | **124,442,112 (124M)**|
 | **Quantization**     | None |
 
 #### **Training Efficiency**
